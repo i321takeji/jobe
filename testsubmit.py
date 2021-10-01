@@ -700,6 +700,27 @@ end.
 ''',
     'sourcefilename': 'prog.pas',
     'expect': { 'outcome': 11 }
+},
+
+#================ Haskell tests ====================
+{
+    'comment': 'Good Hello world Haskell test',
+    'language_id': 'haskell',
+    'sourcecode': r'''main :: IO ()
+main = putStrLn "Hello world!"
+''',
+    'sourcefilename': 'prog.hs',
+    'expect': { 'outcome': 15, 'stdout': "Hello world!\n" }
+},
+
+{
+    'comment': 'Fail Hello world Haskell test',
+    'language_id': 'haskell',
+    'sourcecode': r'''main :: IO ()
+main = putStrLn "Hello world!
+''',
+    'sourcefilename': 'prog.hs',
+    'expect': { 'outcome': 11 }
 }
 
 ]
