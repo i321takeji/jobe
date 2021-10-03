@@ -21,6 +21,10 @@
     To run selected tests by language:
         ./testsubmit.py python3 octave --verbose
     (Use of --verbose is optional here.)
+
+    To run tests for supported languages only:
+        ./testsubmit.py --supported --verbose
+    (Use of --verbose is optional here.)
 '''
 
 from urllib.request import urlopen
