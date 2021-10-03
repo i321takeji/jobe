@@ -962,6 +962,7 @@ def do_get_languages():
         for lang, version in lang_versions:
             print("    {}: {}".format(lang, version))
     print()
+    return lang_versions
 
 
 def check_bad_cputime():
@@ -994,15 +995,18 @@ int main() {
 def main():
     '''Every home should have one'''
     global VERBOSE
-    do_get_languages()
+    lang_versions = do_get_languages()
     langs_to_run = set(sys.argv[1:]) # Get rid of the program name
     if '--verbose' in langs_to_run:
         VERBOSE = True
         langs_to_run.remove('--verbose')
     if len(langs_to_run) == 0:
         langs_to_run = set([testcase['language_id'] for testcase in TEST_SET])
+    elif '--supported' in langs_to_run:
+        langs_to_run.remove('--supported')
+        langs_to_run = set([lang for lang, _ in lang_versions])
     counters = [0, 0, 0]  # Passes, fails, exceptions
-    tests_run = 0;
+    tests_run = 0
     for test in TEST_SET:
         if test['language_id'] in langs_to_run:
             tests_run += 1
